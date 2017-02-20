@@ -1,0 +1,37 @@
+{
+	#The mapping of this file is identical to the class mapping, except for the 'nested' type for this mapping. The
+	#'nested' type is necessary since each java file may have more than one "other" class (but only one "main" class).
+	"type": "nested",
+	"properties": {
+		"extends": {"type": "string", "analyzer": "camel"},
+		"implements": {"type": "string", "analyzer": "camel"},
+		"methods": {
+			"type": "nested",
+			"properties": {
+				"modifiers": {"type": "string", "index" : "not_analyzed"},
+				"name" : {"type": "string", "analyzer": "camel"},
+				"parameters": {
+					"type": "nested",
+					"properties": {
+						"name" : {"type": "string", "analyzer": "camel"},
+						"type": {"type": "string", "analyzer": "camel"}
+					}
+				},
+				"returntype": {"type": "string", "analyzer": "camel"},
+				"throws": {"type": "string", "analyzer": "camel"}
+			}
+		},
+		"modifiers": {"type": "string", "index" : "not_analyzed"},
+		"name" : {"type": "string", "analyzer": "camel"},
+		"innerclasses" : "__LOAD__inner_class_mapping",
+		"type" : {"type": "string", "analyzer": "camel"},
+		"variables": {
+			"type": "nested",
+			"properties": {
+				"modifiers": {"type": "string", "index" : "not_analyzed"},
+				"name" : {"type": "string", "analyzer": "camel"},
+				"type": {"type": "string", "analyzer": "camel"}
+			}
+		}
+	}
+}

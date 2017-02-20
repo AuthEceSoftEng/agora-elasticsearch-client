@@ -1,0 +1,16 @@
+{
+	"projects": {
+		"properties": {
+			"fullname": {"type": "string", "index" : "not_analyzed"},        #Most of the project's fields are useful
+			"default_branch": {"type": "string", "index" : "not_analyzed"},  #to be stored, yet analyzing them has no
+			"trees_url": {"type": "string", "index" : "not_analyzed"},       #use. So URLs and 'default_branch' are not
+			"url": {"type": "string", "index" : "not_analyzed"},             #analyzed while 'fullname' is used only to
+			"git_url": {"type": "string", "index" : "not_analyzed"},         #search for the project when its '_id' is
+			                                                                 #unknown (using 'standard' analyzer).
+
+			"user": {"type": "string"},                                      #One can also search for a project by the 
+			"name": {"type": "string"}                                       #fields 'user' and 'name'. These are
+			                                                                 #analyzed using the standard analyzer.
+		}
+	}
+}

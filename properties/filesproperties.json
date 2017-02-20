@@ -1,0 +1,51 @@
+{
+	"files": {
+		"_parent": {                          #The parent attribute can be used to perform 'has_child' queries or
+			"type": "projects"                #simply find all files of a project.
+		},
+		"properties": {
+			"fullpathname": {"type": "string", "analyzer": "file_path"},   #This is equal to the '_id' field, but it is
+			                                                               #indexed using the 'file_path' analyzer to
+			                                                               #allow searching for a file given its path.
+
+			"path": {"type": "string", "analyzer": "file_path"},           #'path' is also analyzed using 'file_path'
+			                                                               #to allow easier searching within projects.
+
+			"name": {"type": "string"},                                    #The filename of each file is analyzed using
+			                                                               #the standard analyzer.
+
+			"project": {"type": "string"},                                 #'project' is analyzed using the standard
+			                                                               #analyzer to allow queries given project name
+
+			"mode": {"type": "string", "index" : "not_analyzed"},          #The 'mode' is not analyzed. It refers to the
+			                                                               #git file mode and is one of:
+			                                                               #040000: Directory
+			                                                               #100644: Regular non-executable file
+			                                                               #100664: Regular non-executable group-writeable file
+			                                                               #100755: Regular executable file
+			                                                               #120000: Symbolic link
+			                                                               #160000: Gitlink
+
+			"sha": {"type": "string", "index" : "not_analyzed"},           #The 'sha' is not analyzed and refers to the
+			                                                               #last commit at which the file was updated
+
+			"type": {"type": "string", "index" : "not_analyzed"},          #The 'type' is not analyzed. It refers to the
+			                                                               #git type and is one of: blob, tree, commit, tag
+
+			"extension": {"type": "string", "index" : "not_analyzed"},     #The file extension is not analyzed.
+			"url": {"type": "string", "index" : "not_analyzed"},           #The file url is not analyzed.
+
+			"content": {"type": "string"},                                 #The 'content' is analyzed using the standard
+			"analyzedcontent": {"type": "string"},                         #analyzer and the 'analyzedcontent' is analyzed
+			                                                               #using the custom 'javasource' analyzer.
+			"code": {
+				"properties": {
+					"class": "__LOAD__class_mapping",                      #The main classe has its own mapping file.
+					"imports": {"type": "string", "analyzer": "camel"},    #The imports and the package of each file are
+					"package": {"type": "string", "analyzer": "camel"},    #analyzed using the camel analyzer.
+					"otherclasses": "__LOAD__other_class_mapping"          #Other classes have their own mapping file.
+				}
+			}
+		}
+	}
+}

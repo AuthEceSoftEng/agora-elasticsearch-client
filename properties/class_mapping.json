@@ -1,0 +1,40 @@
+{
+	"properties": {
+		"extends": {"type": "string", "analyzer": "camel"},                 #The 'extends' and 'implements' are analyzed
+		"implements": {"type": "string", "analyzer": "camel"},              #using the camel analyzer since their values.
+		                                                                    #since their values are arbitrary.
+
+		"methods": {                                                        #Methods are nested so that each method can
+			"type": "nested",                                               #be searched using an autonomous query
+			"properties": {                                                 #(allowing also multi-method queries).
+				"modifiers": {"type": "string", "index" : "not_analyzed"},  #Modifiers are not analyzed since their
+		                                                                    #values are specific (e.g. private, public).
+				"name" : {"type": "string", "analyzer": "camel"},           #'name' is analyzed using the camel analyzer.
+				"parameters": {
+					"type": "nested",                                       #Method parameters are also nested
+					"properties": {
+						"name" : {"type": "string", "analyzer": "camel"},   #'name' and 'type' are arbitrary, so they are
+						"type": {"type": "string", "analyzer": "camel"}     #analyzed using the camel analyzer.
+					}
+				},
+				"returntype": {"type": "string", "analyzer": "camel"},      #The return type and the exceptions are also
+				"throws": {"type": "string", "analyzer": "camel"}           #analyzed using the camel analyzer.
+			}
+		},
+
+		"modifiers": {"type": "string", "index" : "not_analyzed"},          #As in methods, class modifiers are not
+		"name" : {"type": "string", "analyzer": "camel"},                   #analyzed but their name and type are
+		"type" : {"type": "string", "analyzer": "camel"},                   #analyzed using the camel analyzer.
+
+		"innerclasses" : "__LOAD__inner_class_mapping",                     #Inner classes have their own mapping file.
+
+		"variables": {
+			"type": "nested",                                               #Variables are also nested.
+			"properties": {
+				"modifiers": {"type": "string", "index" : "not_analyzed"},  #Variable modifiers are not analyzed, but
+				"name" : {"type": "string", "analyzer": "camel"},           #the name and type of each variable is
+				"type": {"type": "string", "analyzer": "camel"}             #analyzed using the camel analyzer.
+			}
+		}
+	}
+}

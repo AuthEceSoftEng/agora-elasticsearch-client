@@ -1,0 +1,51 @@
+{
+	"settings": {
+		#The number of shards and the number of replicas depends on the machine used to store this index. For now,
+		#one shard with no replicas should be enough. (We require at least one shard per index. Replicas are used
+		#mainly to achieve faster queries).
+		"number_of_shards": 1,
+		"number_of_replicas": 0,
+		"max_result_window": 100000000,
+
+		"analysis": {
+			"analyzer": {
+
+				#Custom analyzer for analyzing file paths
+				"file_path": {
+					"type": "custom",
+					"tokenizer": "path_hierarchy",
+					"filter": ["lowercase"]
+				},
+				#Example: "/something/something/else" --> ["/something", "/something/something", "/something/something/else"]
+
+				#Custom analyzer for camelCase fields
+				"camel": {
+					"type": "pattern",
+					"pattern": "([^\\p{L}\\d]+)|(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)|(?<=[\\p{L}&&[^\\p{Lu}]])(?=\\p{Lu})|(?<=\\p{Lu})(?=\\p{Lu}[\\p{L}&&[^\\p{Lu}]])"
+					#Explanation of the above regular expression
+					#([^\\p{L}\\d]+)                      #swallow non letters and numbers,
+					#	| (?<=\\D)(?=\\d)                 #   or non-number followed by number,
+					#	| (?<=\\d)(?=\\D)                 #   or number followed by non-number,
+					#	| (?<=[ \\p{L} && [^\\p{Lu}]])    #   or lower case
+					#(?=\\p{Lu})                          #followed by upper case,
+					#	| (?<=\\p{Lu})                    #   or upper case
+					#(?=\\p{Lu}                           #followed by upper case
+					#	[\\p{L}&&[^\\p{Lu}]])             #   then lower case
+				},
+				#Example: "MooseX::FTPClass2_beta" --> ["moose", "x", "ftp", "class", "2", "beta"]
+
+				#Custom analyzer for java source files (standard analyzer using java stopwords)
+				"javasource": {
+					"type" : "standard",
+					"stopwords" : ["public", "private", "protected", "interface", "abstract", "implements", "extends",
+								   "null", "new", "switch", "case", "default", "synchronized", "do", "if", "else",
+								   "break", "continue", "this", "assert", "for", "instanceof", "transient", "final",
+								   "static", "void", "catch", "try", "throws", "throw", "class", "finally", "return",
+								   "const", "native", "super", "while", "import", "package", "true", "false"]
+				}
+				#Example: "private int getSize(){\n\treturn size;\n}" --> ["int", "getsize", "size"]
+
+			}
+		}
+	}
+}
