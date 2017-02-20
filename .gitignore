@@ -9,3 +9,4 @@ target/
 __pycache__
 *.pyc
 bower_components
+agora.properties
