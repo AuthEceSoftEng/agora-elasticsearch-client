@@ -8,7 +8,7 @@ The structure of the file is the following:
 <pre><code>[AGORAProperties]
 
 # ASTParser path
-ASTParserPath = (path to ASTParser.jar)
+ASTParserPath = (path to agora-ast-parser.jar)
 
 # Git system command
 gitcommand = (path to git executable)
