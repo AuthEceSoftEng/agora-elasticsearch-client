@@ -52,10 +52,17 @@ sudo cp agora-elasticsearch-client/configuration/elasticsearch.yml /etc/elastics
 sudo service elasticsearch restart
 ```
 
-- Configure apache (provided agora.conf configuration file
+- Configure apache (provided agora.conf configuration file - first add `Listen 8080` in file `/etc/apache2/ports.conf`)
 ```
 sudo mv /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000.default.conf.bak
 sudo cp agora-elasticsearch-client/configuration/agora.conf /etc/apache2/sites-enabled/agora.conf
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+
+sudo mkdir -p /usr/local/apache/passwd/
+sudo cd /usr/local/apache/passwd/
+sudo htpasswd passwords admin
+
 sudo service apache2 restart
 ```
 
