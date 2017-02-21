@@ -34,6 +34,7 @@ be one of the following:
 - create_index: creates the index and the mappings
 - add_project name: adds or updates a project given its github url
 - add_projects file: adds or updates projects given a list of github urls (in a txt file)
+- flush_index: flushes the index
 - delete_project name: deletes a project given its github url
 - delete_projects file: deletes projects given a list of github urls (in a txt file)
 - delete_index: deletes the index and the mappings

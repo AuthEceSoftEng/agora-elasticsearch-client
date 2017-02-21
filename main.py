@@ -9,6 +9,7 @@ def print_usage():
 	print("   create_index: creates the index and the mappings")
 	print("   add_project name: adds or updates a project given its github url")
 	print("   add_projects file: adds or updates projects given a list of github urls (in a txt file)")
+	print("   flush_index: flushes the index")
 	print("   delete_project name: deletes a project given its github url")
 	print("   delete_projects file: deletes projects given a list of github urls (in a txt file)")
 	print("   delete_index: deletes the index and the mappings")
@@ -19,7 +20,7 @@ if __name__ == "__main__":
 	properties = conparser["AGORAProperties"]
 	dbmanager = DBManager(properties)
 
-	if (not sys.argv):
+	if ((not sys.argv) or len(sys.argv) <= 1):
 		print_usage()
 	elif(sys.argv[1] == "create_index"):
 		dbmanager.create_index()
@@ -27,6 +28,8 @@ if __name__ == "__main__":
 		dbmanager.add_project(sys.argv[2])
 	elif(sys.argv[1] == "add_projects"):
 		dbmanager.add_projects(read_file_in_lines(sys.argv[2]))
+	elif(sys.argv[1] == "flush_index"):
+		dbmanager.flush_index()
 	elif(sys.argv[1] == "delete_project"):
 		dbmanager.delete_project(sys.argv[2])
 	elif(sys.argv[1] == "delete_projects"):
