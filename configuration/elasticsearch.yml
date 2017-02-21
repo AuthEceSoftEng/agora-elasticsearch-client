@@ -88,6 +88,6 @@ network.host: localhost
 #
 #action.destructive_requires_name: true
 
-# Allow site plugins from localhost
+# Allow cross origin requests
 http.cors.enabled: true
-http.cors.allow-origin: /https?:\/\/localhost(:[0-9]+)?/
+http.cors.allow-origin: "*"
