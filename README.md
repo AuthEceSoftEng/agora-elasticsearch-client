@@ -5,7 +5,8 @@ required for this python application website can be installed using pip, issuing
 the command: <pre><code>pip install -r requirements.txt</code></pre>
 To execute the script you must first set the options in file agora.properties.
 The structure of the file is the following:
-<pre><code>[AGORAProperties]
+```
+[AGORAProperties]
 
 # ASTParser path
 ASTParserPath = (path to agora-ast-parser.jar)
@@ -26,7 +27,8 @@ indexname = agora
 host = localhost
 port = 9200
 sourcecodedir = (location where the cloned code will be stored)
-backupdir = (location where the backup of AGORA will be stored)</pre></code>
+backupdir = (location where the backup of AGORA will be stored)
+```
 
 After setting the properties file, you can execute the script. The provided
 functionalities are selected using command line arguments. The arguments must
