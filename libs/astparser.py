@@ -16,7 +16,7 @@ class _ASTParser(object):
 		:param path_to_ASTParser_jar: the path to the ASTParser jar.
 		"""
 		self.cmd = ['java', '-cp', path_to_ASTParser_jar, 'astparser.PythonBinder']
-		self.proc = subprocess.Popen(self.cmd, stdin=PIPE, stdout=PIPE, stderr=STDOUT)
+		self.proc = subprocess.Popen(self.cmd, stdin = PIPE, stdout = PIPE, stderr = STDOUT)
 		self.nummessages = 0
 		line = self.send_message("START_OF_TRANSMISSION")
 		if line != "START_OF_TRANSMISSION":
@@ -26,15 +26,19 @@ class _ASTParser(object):
 	def close_parser(self):
 		"""
 		Closes the parser.
+		
+		:returns: True if the parser is correctly closed, or False otherwise.
 		"""
 		return self.send_message("END_OF_TRANSMISSION") == "END_OF_TRANSMISSION"
 
-	def restart_parser(self, force=False):
+	def restart_parser(self, force = False):
 		"""
 		Restarts the parser.
+		
+		:param force: boolean indicating whether the parser should be restarted even if it crashed (True) or not (False).
 		"""
 		if force or self.send_message("END_OF_TRANSMISSION") == "END_OF_TRANSMISSION":
-			self.proc = subprocess.Popen(self.cmd, stdin=PIPE, stdout=PIPE, stderr=STDOUT)
+			self.proc = subprocess.Popen(self.cmd, stdin = PIPE, stdout = PIPE, stderr = STDOUT)
 			self.nummessages = 0
 		else:
 			print("Error in Java compiler!!")
@@ -46,6 +50,7 @@ class _ASTParser(object):
 		
 		:param code_entity: the path or the contents of the code entity.
 		:param code_entity_properties: the properties of the code entity including its type and expected representation.
+		:returns: the AST of the given code entity.
 		"""
 		self.nummessages += 1
 		if self.nummessages == 10000:
@@ -57,8 +62,9 @@ class _ASTParser(object):
 		Sends a new message to the ASTParser jar.
 		
 		:param message: the message to be sent.
+		:returns: the response to the sent message.
 		"""
-		decodedbytes = message.encode(encoding='ascii')
+		decodedbytes = message.encode(encoding = 'ascii')
 		b64encodedbytes = base64.b64encode(decodedbytes)
 		self.proc.stdin.write(b64encodedbytes + b"\r\n")
 		self.proc.stdin.flush()
@@ -79,7 +85,7 @@ class ASTParser(_ASTParser):
 		"""
 		Initializes this AST Parser.
 		
-		:param path_to_ASTParser_jar: the path to the ASTParser jar
+		:param path_to_ASTParser_jar: the path to the ASTParser jar.
 		"""
 		super(ASTParser, self).__init__(path_to_ASTParser_jar)
 

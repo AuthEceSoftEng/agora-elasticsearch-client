@@ -4,6 +4,9 @@ from libs.filefunctions import read_file_in_lines
 from dbmanager import DBManager
 
 def print_usage():
+	"""
+	Prints the usage information of this python file.
+	"""
 	print("Usage: python main.py arg")
 	print("where arg can be one of the following:")
 	print("   create_index: creates the index and the mappings")
