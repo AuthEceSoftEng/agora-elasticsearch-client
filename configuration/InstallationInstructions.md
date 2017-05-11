@@ -50,6 +50,7 @@ git clone https://github.com/AuthEceSoftEng/agora-web-application.git
 ```
 sudo cp agora-elasticsearch-client/configuration/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
 sudo service elasticsearch restart
+systemctl enable elasticsearch
 ```
 
 - Configure apache Step 1: add `Listen 8080` in file `/etc/apache2/ports.conf`
