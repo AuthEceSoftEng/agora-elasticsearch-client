@@ -96,6 +96,8 @@ cd ../agora-elasticsearch-client
 pip3 install -r requirements.txt
 ```
 
+- Create a file agora.properties and fill it (according to the sample file sample-agora.properties) with the appropriate paths, usernames and password. The username and the password of the AGORA admin account are the ones you set at the Step 4 of configuring apache.
+
 - Create and populate the index
 ```
 sudo python3 main.py create_index
