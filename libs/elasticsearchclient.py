@@ -140,8 +140,8 @@ class ElasticSearchClient:
 		
 		:param project_id: the id of the project to be deleted.
 		"""
+		self.client.delete_by_query(index = self.indexname, doc_type = 'files', body = {"query": { "bool": { "must": { "match_all": {} }, "filter": { "term": { "_routing": project_id } } } } })
 		self.client.delete(index = self.indexname, doc_type = 'projects', id = project_id)
-		self.client.delete_by_query(index = self.indexname, doc_type = 'files', body = {"query": { "filtered": { "query": { "match_all": {} }, "filter": { "term": { "_routing": project_id } } } } })
 
 	def get_project_fileids_and_shas(self, project_id):
 		"""

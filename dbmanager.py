@@ -1,4 +1,3 @@
-import os
 import sys
 from libs.filefunctions import read_ascii_file
 from libs.gitdownloader import GitDownloader
@@ -64,7 +63,7 @@ class DBManager:
 		thedots = int(len(sourcefiles) / 5), int(2 * len(sourcefiles) / 5), int(3 * len(sourcefiles) / 5), int(4 * len(sourcefiles) / 5)
 		for adot, afile in enumerate(sourcefiles):
 			if adot in thedots: sys.stdout.write('.')
-			yield (project_path + os.sep + os.sep.join(afile['path'].split(os.sep)), afile)
+			yield (project_path.replace('\\', '/') + '/' + '/'.join(afile['path'].split('/')), afile)
 	
 	def set_file_code_and_contents(self, file_path, afile, full_compiled_source = None):
 		"""
@@ -98,7 +97,7 @@ class DBManager:
 		sys.stdout.write('\nDownloading project info for project ' + project_id)
 		project, sourcefiles = self.gpdownloader.download_project(project_address)
 		sys.stdout.write('. Done!\n')
-		project_path = self.sourcecodedir + os.sep + project['user'] + os.sep + project['name']
+		project_path = self.sourcecodedir + '/' + project['user'] + '/' + project['name']
 	
 		self.gitdownloader.git_pull_or_clone(project_id, project['git_url'], project_path, project['default_branch'])
 	
@@ -142,7 +141,7 @@ class DBManager:
 		"""
 		project_id = '/'.join(project_address.split('/')[-2:])
 		if self.esclient.has_project(project_id):
-			self.esclient.delete_project()
+			self.esclient.delete_project(project_id)
 	
 	def add_projects(self, project_addresses):
 		"""

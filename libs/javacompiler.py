@@ -21,6 +21,7 @@ class JavaCompiler:
 		:returns: an AST containing all the files of a project in JSON format.
 		"""
 		data = self.ast_parser.parse_folder(project_folder)
+		data = data.replace('\\', '/')
 		data = json.loads(data)
 		for afilename in data.keys():
 			data[afilename] = self.delete_nested_inner_classes(data[afilename])
