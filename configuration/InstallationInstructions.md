@@ -30,12 +30,11 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node`
 sudo apt-get install apache2
 ```
 
-- Download and install elasticsearch
+- Download and install elasticsearch (change USERNAME and USERGROUP to your own)
 ```
-wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.2.0.deb
-sudo dpkg -i elasticsearch-5.2.0.deb
-sudo update-rc.d elasticsearch defaults
-sudo service elasticsearch start
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.2.0.tar.gz
+tar -zxf elasticsearch-5.2.0.tar.gz
+sudo chown -R USERNAME:USERGROUP elasticsearch-5.2.0/
 ```
 
 - Git clone all repos into your home directory (or any other dir)
@@ -46,12 +45,18 @@ git clone https://github.com/AuthEceSoftEng/agora-web-application.git
 ```
 
 # Configurations
-- Configure elasticsearch (provided elasticsearch.yml configuration file)
+- Configure elasticsearch Step 1: set elasticsearch.yml configuration file
 ```
-sudo cp agora-elasticsearch-client/configuration/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
-sudo service elasticsearch restart
-systemctl enable elasticsearch
+sudo cp agora-elasticsearch-client/configuration/elasticsearch.yml elasticsearch-5.2.0/config/elasticsearch.yml
 ```
+
+- Configure elasticsearch Step 2: create scripts to start/stop the service
+```
+echo "./elasticsearch-5.2.0/bin/elasticsearch -d -p pid" > startElastic.sh
+echo "kill `cat pid`" > stopElastic.sh
+```
+
+- Configure elasticsearch Step 3: add the command `su - USERNAME -c "/home/USERNAME/startElastic.sh"` in file `/etc/rc.local` (change USERNAME to your own)
 
 - Configure apache Step 1: add `Listen 8080` in file `/etc/apache2/ports.conf`
 - Configure apache Step 2: use provided agora.conf configuration file
