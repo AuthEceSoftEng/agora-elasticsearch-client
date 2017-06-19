@@ -35,6 +35,8 @@ sudo apt-get install apache2
 wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.2.0.tar.gz
 tar -zxf elasticsearch-5.2.0.tar.gz
 sudo chown -R USERNAME:USERGROUP elasticsearch-5.2.0/
+mkdir elasticsearch-5.2.0/code
+mkdir elasticsearch-5.2.0/backup
 ```
 
 - Git clone all repos into your home directory (or any other dir)
