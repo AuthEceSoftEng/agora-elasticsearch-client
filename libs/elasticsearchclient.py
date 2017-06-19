@@ -132,7 +132,7 @@ class ElasticSearchClient:
 		
 		:param afile_id: the id of the file to be deleted.
 		"""
-		self.client.delete(index = self.indexname, doc_type = 'files', id = afile_id)
+		self.client.delete(index = self.indexname, doc_type = 'files', id = afile_id, routing = '/'.join(afile_id.split('/')[0:2]))
 
 	def delete_project(self, project_id):
 		"""
