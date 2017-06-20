@@ -67,34 +67,37 @@ class GithubProjectDownloader(GithubDownloader):
 		:returns: a JSON object containing the main information of the project and a list containing the filenames of its files.
 		"""
 		project = self.download_object(project_address)
-		sys.stdout.write('.')
-		if project['default_branch'] == 'master':
-			sourcecode = self.download_object(project['trees_url'].split('{')[0] + '/master', ["recursive=1"])
-		else:
-			branch = self.download_object(project['url'] + '/branches/' + project['default_branch'], ["recursive=1"])
+		if project != None:
 			sys.stdout.write('.')
-			sourcecode = self.download_object(project['trees_url'].split('{')[0] + '/' + branch['commit']['sha'], ["recursive=1"])
-		projectdoc = {}
-		# projectdoc['_id'] = project['owner']['login'] + '/' + project['name']
-		projectdoc['fullname'] = project['owner']['login'] + '/' + project['name']
-		projectdoc['default_branch'] = project['default_branch']
-		projectdoc['trees_url'] = project['trees_url']
-		projectdoc['url'] = project['url']
-		projectdoc['user'] = project['owner']['login']
-		projectdoc['name'] = project['name']
-		projectdoc['git_url'] = project['git_url']
-		sourcedocs = []
-		for afile in sourcecode['tree']:
-			newfile = {}
-			# newfile['_id'] = project['_id'] + '/' + afile['path']
-			newfile['fullpathname'] = projectdoc['fullname'] + '/' + afile['path']
-			newfile['project'] = projectdoc['fullname']
-			newfile['mode'] = afile['mode']
-			newfile['path'] = afile['path']
-			newfile['name'] = os.path.basename(afile['path'])
-			newfile['sha'] = afile['sha']
-			newfile['type'] = afile['type']
-			newfile['extension'] = '' if len(afile['path'].split('.')) <= 1 else afile['path'].split('.')[-1]
-			newfile['url'] = afile['url'] if 'url' in afile else ''
-			sourcedocs.append(newfile)
-		return projectdoc, sourcedocs
+			if project['default_branch'] == 'master':
+				sourcecode = self.download_object(project['trees_url'].split('{')[0] + '/master', ["recursive=1"])
+			else:
+				branch = self.download_object(project['url'] + '/branches/' + project['default_branch'], ["recursive=1"])
+				sys.stdout.write('.')
+				sourcecode = self.download_object(project['trees_url'].split('{')[0] + '/' + branch['commit']['sha'], ["recursive=1"])
+			projectdoc = {}
+			# projectdoc['_id'] = project['owner']['login'] + '/' + project['name']
+			projectdoc['fullname'] = project['owner']['login'] + '/' + project['name']
+			projectdoc['default_branch'] = project['default_branch']
+			projectdoc['trees_url'] = project['trees_url']
+			projectdoc['url'] = project['url']
+			projectdoc['user'] = project['owner']['login']
+			projectdoc['name'] = project['name']
+			projectdoc['git_url'] = project['git_url']
+			sourcedocs = []
+			for afile in sourcecode['tree']:
+				newfile = {}
+				# newfile['_id'] = project['_id'] + '/' + afile['path']
+				newfile['fullpathname'] = projectdoc['fullname'] + '/' + afile['path']
+				newfile['project'] = projectdoc['fullname']
+				newfile['mode'] = afile['mode']
+				newfile['path'] = afile['path']
+				newfile['name'] = os.path.basename(afile['path'])
+				newfile['sha'] = afile['sha']
+				newfile['type'] = afile['type']
+				newfile['extension'] = '' if len(afile['path'].split('.')) <= 1 else afile['path'].split('.')[-1]
+				newfile['url'] = afile['url'] if 'url' in afile else ''
+				sourcedocs.append(newfile)
+			return projectdoc, sourcedocs
+		else:
+			return None, None

@@ -96,45 +96,48 @@ class DBManager:
 		project_id = '/'.join(project_address.split('/')[-2:])
 		sys.stdout.write('\nDownloading project info for project ' + project_id)
 		project, sourcefiles = self.gpdownloader.download_project(project_address)
-		sys.stdout.write('. Done!\n')
-		project_path = self.sourcecodedir + '/' + project['user'] + '/' + project['name']
-	
-		self.gitdownloader.git_pull_or_clone(project_id, project['git_url'], project_path, project['default_branch'])
-	
-		if self.esclient.has_project(project_id):
-			sys.stdout.write('Project already exists in database!\n')
-			fileidsandshas = self.esclient.get_project_fileids_and_shas(project_id)
-			sys.stdout.write('Updating database entries')
-			for file_path, afile in self.get_enumerated_files_with_paths(project_path, sourcefiles):
-				file_id = afile['fullpathname']
-				if file_id in fileidsandshas:
-					# File exists
-					if not afile['sha'] == fileidsandshas[file_id]:
-						self.esclient.update_file(afile)
-					del fileidsandshas[file_id]
-				else:
-					# File does not exist
-					self.set_file_code_and_contents(file_path, afile)
-					self.esclient.create_file(afile)
-			sys.stdout.write('.')
-			# Delete remaining files
-			for oldfileid in fileidsandshas:
-				self.esclient.delete_file(oldfileid)
-			sys.stdout.write(' Done!\n')
-		else:
-			sys.stdout.write('Adding project to database!\n')
-			sys.stdout.write('Compiling project')
-			full_compiled_source = self.javaparser.parse_project(project_path)
-			if len(full_compiled_source.keys()) > 0:
-				sys.stdout.write('. Done!\n')
-				self.esclient.create_project(project)
-				sys.stdout.write('Creating database entries')
+		if project != None:
+			sys.stdout.write('. Done!\n')
+			project_path = self.sourcecodedir + '/' + project['user'] + '/' + project['name']
+		
+			self.gitdownloader.git_pull_or_clone(project_id, project['git_url'], project_path, project['default_branch'])
+		
+			if self.esclient.has_project(project_id):
+				sys.stdout.write('Project already exists in database!\n')
+				fileidsandshas = self.esclient.get_project_fileids_and_shas(project_id)
+				sys.stdout.write('Updating database entries')
 				for file_path, afile in self.get_enumerated_files_with_paths(project_path, sourcefiles):
-					self.set_file_code_and_contents(file_path, afile, full_compiled_source)
-					self.esclient.create_file(afile)
+					file_id = afile['fullpathname']
+					if file_id in fileidsandshas:
+						# File exists
+						if not afile['sha'] == fileidsandshas[file_id]:
+							self.esclient.update_file(afile)
+						del fileidsandshas[file_id]
+					else:
+						# File does not exist
+						self.set_file_code_and_contents(file_path, afile)
+						self.esclient.create_file(afile)
+				sys.stdout.write('.')
+				# Delete remaining files
+				for oldfileid in fileidsandshas:
+					self.esclient.delete_file(oldfileid)
 				sys.stdout.write(' Done!\n')
 			else:
-				sys.stdout.write('. No java files found!\n')
+				sys.stdout.write('Adding project to database!\n')
+				sys.stdout.write('Compiling project')
+				full_compiled_source = self.javaparser.parse_project(project_path)
+				if len(full_compiled_source.keys()) > 0:
+					sys.stdout.write('. Done!\n')
+					self.esclient.create_project(project)
+					sys.stdout.write('Creating database entries')
+					for file_path, afile in self.get_enumerated_files_with_paths(project_path, sourcefiles):
+						self.set_file_code_and_contents(file_path, afile, full_compiled_source)
+						self.esclient.create_file(afile)
+					sys.stdout.write(' Done!\n')
+				else:
+					sys.stdout.write('. No java files found!\n')
+		else:
+			sys.stdout.write('. Project not found!\n')
 	
 	def delete_project(self, project_address):
 		"""
