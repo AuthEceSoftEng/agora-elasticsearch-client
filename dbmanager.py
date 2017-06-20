@@ -125,13 +125,16 @@ class DBManager:
 			sys.stdout.write('Adding project to database!\n')
 			sys.stdout.write('Compiling project')
 			full_compiled_source = self.javaparser.parse_project(project_path)
-			sys.stdout.write('. Done!\n')
-			self.esclient.create_project(project)
-			sys.stdout.write('Creating database entries')
-			for file_path, afile in self.get_enumerated_files_with_paths(project_path, sourcefiles):
-				self.set_file_code_and_contents(file_path, afile, full_compiled_source)
-				self.esclient.create_file(afile)
-			sys.stdout.write(' Done!\n')
+			if len(full_compiled_source.keys()) > 0:
+				sys.stdout.write('. Done!\n')
+				self.esclient.create_project(project)
+				sys.stdout.write('Creating database entries')
+				for file_path, afile in self.get_enumerated_files_with_paths(project_path, sourcefiles):
+					self.set_file_code_and_contents(file_path, afile, full_compiled_source)
+					self.esclient.create_file(afile)
+				sys.stdout.write(' Done!\n')
+			else:
+				sys.stdout.write('. No java files found!\n')
 	
 	def delete_project(self, project_address):
 		"""
