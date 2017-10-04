@@ -1,5 +1,5 @@
 https://api.github.com/repos/nathanmarz/storm
-#https://api.github.com/repos/elasticsearch/elasticsearch
+https://api.github.com/repos/elasticsearch/elasticsearch
 https://api.github.com/repos/JakeWharton/ActionBarSherlock
 https://api.github.com/repos/jfeinstein10/SlidingMenu
 https://api.github.com/repos/nostra13/Android-Universal-Image-Loader
@@ -83,7 +83,7 @@ https://api.github.com/repos/commonsguy/cw-omnibus
 https://api.github.com/repos/Comcast/FreeFlow
 https://api.github.com/repos/koush/AndroidAsync
 https://api.github.com/repos/ManuelPeinado/FadingActionBar
-#https://api.github.com/repos/JetBrains/intellij-community
+https://api.github.com/repos/JetBrains/intellij-community
 https://api.github.com/repos/jhy/jsoup
 https://api.github.com/repos/yinwang0/pysonar2
 https://api.github.com/repos/greenrobot/greenDAO
@@ -220,7 +220,7 @@ https://api.github.com/repos/tomwhite/hadoop-book
 https://api.github.com/repos/jjoe64/GraphView
 https://api.github.com/repos/romainguy/ViewServer
 https://api.github.com/repos/yinwang0/yin
-#https://api.github.com/repos/JetBrains/kotlin
+https://api.github.com/repos/JetBrains/kotlin
 https://api.github.com/repos/sirthias/parboiled
 https://api.github.com/repos/JohnPersano/SuperToasts
 https://api.github.com/repos/apache/incubator-storm
@@ -231,8 +231,8 @@ https://api.github.com/repos/JetBrains/ideavim
 https://api.github.com/repos/mozilla/rhino
 https://api.github.com/repos/RadiusNetworks/android-ibeacon-service
 https://api.github.com/repos/calabash/calabash-android
-#https://api.github.com/repos/liferay/liferay-portal
-#https://api.github.com/repos/Netflix/astyanax
+https://api.github.com/repos/liferay/liferay-portal
+https://api.github.com/repos/Netflix/astyanax
 https://api.github.com/repos/eoecn/android-app
 https://api.github.com/repos/jackpal/Android-Terminal-Emulator
 https://api.github.com/repos/wyouflf/xUtils
@@ -472,7 +472,7 @@ https://api.github.com/repos/Netflix/archaius
 https://api.github.com/repos/hamcrest/JavaHamcrest
 https://api.github.com/repos/killme2008/Metamorphosis
 https://api.github.com/repos/nhaarman/supertooltips
-#https://api.github.com/repos/JetBrains/MPS
+https://api.github.com/repos/JetBrains/MPS
 https://api.github.com/repos/commonsguy/cwac-merge
 https://api.github.com/repos/wwadge/bonecp
 https://api.github.com/repos/ps3mediaserver/ps3mediaserver
@@ -737,7 +737,7 @@ https://api.github.com/repos/thucydides-webtests/thucydides
 https://api.github.com/repos/biokys/cropimage
 https://api.github.com/repos/agibsonccc/java-deeplearning
 https://api.github.com/repos/getrailo/railo
-#https://api.github.com/repos/proofpoint/kairosdb
+https://api.github.com/repos/proofpoint/kairosdb
 https://api.github.com/repos/cloudfoundry/java-buildpack-auto-reconfiguration
 https://api.github.com/repos/pebble/pebble-sdk-examples
 https://api.github.com/repos/RomainPiel/Titanic
@@ -847,7 +847,7 @@ https://api.github.com/repos/elasticsearch/elasticsearch-cloud-aws
 https://api.github.com/repos/gast-lib/gast-lib
 https://api.github.com/repos/tonyg/reversehttp
 https://api.github.com/repos/tito/2048
-#https://api.github.com/repos/nforge/yobi
+https://api.github.com/repos/nforge/yobi
 https://api.github.com/repos/grifotv/grifotv-portfolio
 https://api.github.com/repos/cloudsmith/geppetto
 https://api.github.com/repos/zeroturnaround/zt-zip
@@ -1616,7 +1616,7 @@ https://api.github.com/repos/card-io/card.io-Android-SDK
 https://api.github.com/repos/umeng/android_download_manager
 https://api.github.com/repos/apache/accumulo
 https://api.github.com/repos/drewww/socket.io-benchmarking
-#https://api.github.com/repos/slagyr/limelight
+https://api.github.com/repos/slagyr/limelight
 https://api.github.com/repos/FasterXML/jackson-datatype-hibernate
 https://api.github.com/repos/rarnu/root-tools
 https://api.github.com/repos/jnr/jnr-ffi
