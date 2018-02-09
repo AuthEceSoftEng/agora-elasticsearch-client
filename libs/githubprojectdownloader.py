@@ -59,14 +59,14 @@ class GithubProjectDownloader(GithubDownloader):
 					bandanger = True
 		return repourls
 
-	def download_project(self, project_address):
+	def download_project(self, project_id):
 		"""
 		Downloads GitHub information about a project.
 		
-		:param project_address: the project address for which information is downloaded.
+		:param project_id: the project id for which information is downloaded.
 		:returns: a JSON object containing the main information of the project and a list containing the filenames of its files.
 		"""
-		project = self.download_object(project_address)
+		project = self.download_object("https://api.github.com/repos/" + project_id)
 		if project != None:
 			sys.stdout.write('.')
 			if project['default_branch'] == 'master':

@@ -95,7 +95,7 @@ class DBManager:
 		"""
 		project_id = '/'.join(project_address.split('/')[-2:])
 		sys.stdout.write('\nDownloading project info for project ' + project_id)
-		project, sourcefiles = self.gpdownloader.download_project(project_address)
+		project, sourcefiles = self.gpdownloader.download_project(project_id)
 		if project != None:
 			sys.stdout.write('. Done!\n')
 			project_path = self.sourcecodedir + '/' + project['user'] + '/' + project['name']
