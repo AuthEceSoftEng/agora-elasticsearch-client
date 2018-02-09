@@ -59,8 +59,9 @@ def read_file_in_lines(filename):
 	lines = []
 	with open(filename) as infile:
 		for line in infile:
+			line = line.strip()
 			if line and not line.startswith('#'):
-				lines.append(line.strip())
+				lines.append(line)
 	return lines
 
 def write_lines_to_file(filename, lines):

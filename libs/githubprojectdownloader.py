@@ -50,7 +50,7 @@ class GithubProjectDownloader(GithubDownloader):
 					rtext = r.text.split('\n')
 					for linenumber, line in enumerate(rtext):
 						if 'repolist-name' in line:
-							repourls.append('https://api.github.com/repos' + rtext[linenumber + 1].split('\"')[1])
+							repourls.append('https://github.com' + rtext[linenumber + 1].split('\"')[1])
 					time.sleep(180)
 				else:
 					time.sleep(600)

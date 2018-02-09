@@ -1,0 +1,10 @@
+https://github.com/square/retrofit
+https://github.com/bumptech/glide
+https://github.com/JakeWharton/butterknife
+https://github.com/greenrobot/EventBus
+https://github.com/nostra13/Android-Universal-Image-Loader
+https://github.com/google/iosched
+https://github.com/square/picasso
+https://github.com/skylot/jadx
+https://github.com/alibaba/fastjson
+https://github.com/Netflix/Hystrix
